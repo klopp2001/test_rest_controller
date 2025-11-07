@@ -20,7 +20,7 @@ public class MessageController {
     ShiftMessageService shiftMessageService;
 
     @GetMapping("/get_messages")
-    public List<ShiftMessage> getMessages() {
+    public List<ShiftMessageDto> getMessages() {
         return shiftMessageService.getNotWrittenShiftMessages();
     }
 

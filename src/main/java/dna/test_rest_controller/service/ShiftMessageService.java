@@ -8,14 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ShiftMessageService {
     @Autowired
     ShiftMessageRepository shiftMessageRepository;
 
-    public List<ShiftMessage> getNotWrittenShiftMessages() {
-        return shiftMessageRepository.findAllByIsWrittenFalse();
+    public List<ShiftMessageDto> getNotWrittenShiftMessages() {
+        List<ShiftMessage> messages = shiftMessageRepository.findAllByIsWrittenFalse();
+        return messages.stream()
+                .map(message -> new ShiftMessageDto(message.getMessageId(),
+                        message.getMessageBody(), message.getSenderId(), message.getSenderUsername()))
+                .collect(Collectors.toList());
     }
 
     //TODO:: not implemented yet. Save shift message
