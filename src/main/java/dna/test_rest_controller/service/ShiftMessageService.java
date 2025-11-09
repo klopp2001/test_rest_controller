@@ -3,6 +3,7 @@ package dna.test_rest_controller.service;
 import dna.test_rest_controller.dto.ShiftMessageDto;
 import dna.test_rest_controller.model.ShiftMessage;
 import dna.test_rest_controller.repository.ShiftMessageRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,14 @@ public class ShiftMessageService {
         shiftMessage.setSenderUsername(dto.getSenderUsername());
         shiftMessage.setIsWritten(Boolean.FALSE);
         shiftMessageRepository.save(shiftMessage);
+    }
+
+    @Transactional
+    public void updateShiftMessage(ShiftMessageDto dto) {
+        ShiftMessage message = shiftMessageRepository.findByMessageId(dto.getMessageId());
+        if (message == null) return;
+
+        message.setMessageBody(dto.getMessageBody());
+        message.setIsWritten(false);
     }
 }

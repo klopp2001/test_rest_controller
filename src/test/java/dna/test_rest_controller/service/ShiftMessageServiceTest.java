@@ -39,12 +39,15 @@ public class ShiftMessageServiceTest {
                 shiftMessage.getSenderId(),
                 shiftMessage.getSenderUsername());
 
-        Mockito.when(shiftMessageRepository.save(shiftMessage)).thenReturn(shiftMessage);
-
         assertDoesNotThrow(() -> shiftMessageService.saveShiftMessage(dto));
         Mockito.verify(shiftMessageRepository).save(Mockito.argThat(arg ->
                 arg.getMessageId().equals(shiftMessage.getMessageId()) &&
                         arg.getMessageBody().equals(shiftMessage.getMessageBody()) &&
                         arg.getSenderUsername().equals(shiftMessage.getSenderUsername())));
+    }
+
+    @Test
+    public void updateShiftMessage_shouldUpdate() {
+
     }
 }

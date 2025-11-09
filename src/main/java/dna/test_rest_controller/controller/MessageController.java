@@ -4,10 +4,7 @@ import dna.test_rest_controller.dto.ShiftMessageDto;
 import dna.test_rest_controller.model.ShiftMessage;
 import dna.test_rest_controller.service.ShiftMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -27,6 +24,11 @@ public class MessageController {
     @PostMapping("/add_message")
     public void addMessage(@RequestBody ShiftMessageDto dto) {
         shiftMessageService.saveShiftMessage(dto);
+    }
+
+    @PatchMapping("/update_message")
+    public void updateMessage(@RequestBody ShiftMessageDto dto) {
+        shiftMessageService.updateShiftMessage(dto);
     }
 
     @GetMapping("/test")

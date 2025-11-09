@@ -10,4 +10,5 @@ import java.util.List;
 public interface ShiftMessageRepository extends JpaRepository<ShiftMessage, Long> {
     //List<ShiftMessage> findAllByWrittenFalse();
     List<ShiftMessage> findAllByIsWrittenFalse();
+    ShiftMessage findByMessageId(String messageId);
 }
